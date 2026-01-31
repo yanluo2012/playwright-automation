@@ -3,38 +3,40 @@ const { LoginPage } = require('../pageobjects/LoginPage.js');  // relative path 
 const { DashboardPage } = require('../pageobjects/DashboardPage.js');
 
 test('End to end order experience', async ({ page }) => {
-    // const cardTitles = page.locator('.card-body b');
-    // const products = page.locator('.card-body');
+    const cardTitles = page.locator('.card-body b');
+    const products = page.locator('.card-body');
     const username = "yanluo2012@gmail.com";
     const password = ".5x.xGRyB8h6RR#";
+    const productName = "ZARA COAT 3";
     const loginPage = new LoginPage(page);
     const dashboardPage = new DashboardPage(page);
 
     await loginPage.goTo();
     await loginPage.validLogin(username, password);
+    await dashboardPage.searchProductAddCart(productName);
+    await dashboardPage.navigateToCart();
 
-    const cardTitles = dashboardPage.productsText;
-    const products = dashboardPage.products;
+    // const cardTitles = dashboardPage.productsText;
+    // const products = dashboardPage.products;
     // // Rahul Shetty said if the page get feeds from API calls, waiting for netwrokidle will ganrantee the availability of elements 
     // await page.waitForLoadState('networkidle'); // some students reported flakiness using this line, Rahul suggested to use the follwoing line
-    await cardTitles.last().waitFor;
     // await page.locator(".card-body b").last().waitFor();
     // const allTitles = await cardTitles.allTextContents();
-    const allTitles = await cardTitles.allTextContents();
+    // const allTitles = await cardTitles.allTextContents();
 
-    const count = allTitles.length;
-    const productName = "ZARA COAT 3";
-    for (let i = 0; i < count; ++i) {
-        if (await products.nth(i).locator('b').textContent() === productName) {
-            // Add to cart
-            await products.nth(i).getByRole('button', { name: 'Add To Cart' }).click();
-            // await products.nth(i).locator("text= Add To Cart").click(); // Rahul's way
-            break;
-        }
+    // const count = allTitles.length;
 
-    }
+    // for (let i = 0; i < count; ++i) {
+    //     if (await products.nth(i).locator('b').textContent() === productName) {
+    //         // Add to cart
+    //         await products.nth(i).getByRole('button', { name: 'Add To Cart' }).click();
+    //         // await products.nth(i).locator("text= Add To Cart").click(); // Rahul's way
+    //         break;
+    //     }
 
-    await page.locator("[routerlink*='cart']").click();
+    // }
+
+    // await page.locator("[routerlink*='cart']").click();
     await page.locator("div li").first().waitFor();
 
     const bool = await page.getByRole('heading', { name: productName }).isVisible;
