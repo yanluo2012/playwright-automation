@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const { POManager } = require('../pageobjects/POManager');
-const dataSet = JSON.parse(JSON.stringify(require("../utils/placeorderTestData.json")));
+const dataset = JSON.parse(JSON.stringify(require("../utils/placeorderTestData.json")));
 
 test('End to end order experience', async ({ page }) => {
     const poManager = new POManager(page, expect);
@@ -11,16 +11,16 @@ test('End to end order experience', async ({ page }) => {
     const checkoutPage = poManager.getCheckoutPage();
 
     await loginPage.goTo();
-    await loginPage.validLogin(dataSet.username, dataSet.password);
-    await dashboardPage.searchProductAddCart(dataSet.productName);
+    await loginPage.validLogin(dataset.username, dataset.password);
+    await dashboardPage.searchProductAddCart(dataset.productName);
     await dashboardPage.navigateToCart();
 
     await page.locator("div li").first().waitFor();
-    const bool = await page.getByRole('heading', { name: dataSet.productName }).isVisible;
+    const bool = await page.getByRole('heading', { name: dataset.productName }).isVisible;
     expect(bool).toBeTruthy();
     await page.getByRole('button', { name: 'Checkout' }).click();
 
-    await checkoutPage.selectCountrySubmit("ind", dataSet.username);
+    await checkoutPage.selectCountrySubmit("ind", dataset.username);
 
     await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
     const orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
