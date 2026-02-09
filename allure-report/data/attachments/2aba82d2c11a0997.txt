@@ -1,0 +1,12 @@
+[
+  'qwerty',
+  'Automation 8',
+  'Automation 8',
+  'ADIDAS ORIGINAL',
+  'ZARA COAT 3',
+  'iphone 13 pro'
+]
+countryCount: 3
+country:  British Indian Ocean Territory
+country:  India
+found India

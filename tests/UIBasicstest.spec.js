@@ -30,7 +30,7 @@ test('Playwright practise', async ({ page }) => {
     console.log(allTitles);
 });
 
-test('UI Controls', async ({ page }) => {
+test('@Web UI Controls', async ({ page }) => {
     const dropdown = page.getByRole('combobox');
     const userRadioButton = page.locator(".radiotextsty").last();
     const okButton = page.getByRole('button', { name: 'Okay' });

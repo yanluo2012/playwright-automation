@@ -16,7 +16,7 @@ test.beforeAll(async ({ browser }) => {
     webContext = await browser.newContext({ storageState: 'state.json' });
 });
 
-test('End to end order experience', async () => {
+test('@API End to end order experience', async () => {
     const page = await webContext.newPage();
     await page.goto('https://rahulshettyacademy.com/client/');
     const cardTitles = page.locator('.card-body b');

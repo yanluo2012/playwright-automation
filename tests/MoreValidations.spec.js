@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test')
 
+test.describe.configure({mode:'parallel'});
 test("Popup validation", async ({ page }) => {
 
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
@@ -31,7 +32,7 @@ test("Screenshot & Visual comparision", async ({ page }) => {
     await expect(page.locator("#displayed-text")).toBeHidden();
 });
 
-test.only("visual", async ({page}) => {
+test("visual", async ({page}) => {
     await page.goto("https://www.google.com/");
     await expect(await page.screenshot()).toMatchSnapshot('google.png');
 });

@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5585","@Web UI Controls","","2026-02-02","passed","2026-02-02","","UIBasicstest.spec.js","",""
+"","10959","@Web Test Data as Fixture","","2026-02-02","passed","2026-02-02","","ClientAppPO.spec.js","",""

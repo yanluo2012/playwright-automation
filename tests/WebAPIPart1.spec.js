@@ -21,7 +21,7 @@ test.beforeAll(async () => {
     console.log("orderId: ", createOrderResponse.orderId);
 });
 
-test('End to end order experience', async ({ page }) => {
+test('@API End to end order experience', async ({ page }) => {
     console.log("token: " + createOrderResponse.token);
     await page.addInitScript(value => {
         window.localStorage.setItem('token', value);
