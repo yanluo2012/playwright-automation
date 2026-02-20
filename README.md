@@ -74,6 +74,7 @@ test.skip('Test to skip', async ({ page }) => {
 ```
 ### Cucumber Tests
 ```bash
+--exit forces Cucumber to terminate the Node process when tests finish.
 # Run a specific feature file
 npx cucumber-js features/ErrorValidations.feature --exit
 

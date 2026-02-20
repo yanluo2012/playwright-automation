@@ -1,8 +1,8 @@
 const { Given, When, Then } = require('@cucumber/cucumber')
 const { expect } = require('@playwright/test')
 
-Given('a login to Ecommerce applicataion with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
-    const products = this.page.locator(".card-body");
+// by default, cucumber has a timeout of 5s for each step, here we are overriding it to 10 seconds for the login step, as sometimes it may take more time to load the page and perform login action
+Given('a login to Ecommerce applicataion with {string} and {string}', { timeout: 10 * 1000 }, async function (username, password) {
     const loginPage = this.poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(username, password);

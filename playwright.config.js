@@ -95,23 +95,20 @@
 // const { devices } = require('@playwright/test');
 
 const config = {
-  testDir: './tests',
+  testDir: './tests', // specify the folder where the tests are located
   retries: 0,
 
   /* Maximum time one test can run for. */
-  timeout: 30 * 1000,
+  timeout: 40 * 1000, // default is 30 seconds, here we set it to 40 seconds explicitly
   expect: {
-
-    timeout: 5000
+    timeout: 6000 // default is 5000 ms, here we set it to 6000 ms explicitly
   },
 
-  reporter: 'html',
+  reporter: 'html', // specify the reporter to use, here we use the built-in HTML reporter to generate a report after the test run
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    browserName : 'chromium',
-    // browserName : 'firefox',
-    // browserName: 'webkit',  // playwright specific engine developed by safari
-    headless: false,
+    browserName : 'chromium', // the most stable browser among the three supported by Playwright, others are firefox, webkit (playwright specific engine developed by safari)
+    headless: false, // set headless to false to see the browser actions, default is true which means the browser will run in the background without a UI
     screenshot: 'on',
     trace: 'on', // retain-on-failure
   },

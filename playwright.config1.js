@@ -15,7 +15,7 @@ const config = {
       name: 'firefox',
       use: {
         browserName: 'firefox',
-        headless: false,
+        headless: false, // set headless to false to see the browser actions, default is true which means the browser will run in the background without a UI
         screenshot: 'on',
         trace: 'on', // retain-on-failure
       }
