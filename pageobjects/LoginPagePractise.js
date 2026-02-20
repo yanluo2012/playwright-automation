@@ -1,3 +1,5 @@
+const { expect } = require('@playwright/test')
+
 class LoginPagePractise {
 
 constructor(page) {
@@ -6,6 +8,7 @@ constructor(page) {
     this.password = page.getByLabel('Password');
     this.termsCheckbox = page.getByRole('checkbox', { name: /I Agree to the terms and conditions/i });
     this.signInButton = page.getByRole('button', { name: 'Sign In' });
+    this.errorMessage = page.getByText(/incorrect/i);
 }
 
 async goTo() {
@@ -19,6 +22,14 @@ async login(username, password) {
 
 async acceptTerms() {
     await this.termsCheckbox.check();
+}
+
+async clickSignIn() {
+    await this.signInButton.click();
+}
+
+async verifyErrorMessage() {
+    await expect(this.errorMessage).toBeVisible();
 }
 
 async signInAndWaitForShop() {

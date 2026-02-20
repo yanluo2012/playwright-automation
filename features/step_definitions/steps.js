@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber')
 const { expect } = require('@playwright/test')
 
 // by default, cucumber has a timeout of 5s for each step, here we are overriding it to 10 seconds for the login step, as sometimes it may take more time to load the page and perform login action
-Given('a login to Ecommerce applicataion with {string} and {string}', { timeout: 10 * 1000 }, async function (username, password) {
+Given('a login to Ecommerce applicataion with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
     const loginPage = this.poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(username, password);
@@ -39,15 +39,14 @@ Then('Verify order in present in the OrderHistory', async function () {
     expect(this.orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy();
 });
 
-Given('a login to Ecommerce2 applicataion with {string} and {string}', async function (username, password) {
-    await this.page.goto('https://rahulshettyacademy.com/loginpagePractise/');
-    await expect(this.page).toHaveTitle('LoginPage Practise | Rahul Shetty Academy');
-    await this.page.getByLabel('Username').fill(username);
-    await this.page.getByLabel('Password').fill(password);
-    await this.page.getByRole('button', { name: 'Sign In' }).click();
+// by default, cucumber has a timeout of 5s for each step, here we are overriding it to 100 seconds for the login step, as sometimes it may take more time to load the page and perform login action
+Given('a login to Ecommerce2 applicataion with {string} and {string}',  { timeout: 100 * 1000 }, async function (username, password) {
+    this.loginPagePractise = this.poManager.getLoginPagePractise();
+    await this.loginPagePractise.goTo();
+    await this.loginPagePractise.login(username, password);
+    await this.loginPagePractise.clickSignIn();
 });
 
 Then('Verify Error message is displayed', async function () {
-    const errorMessage = this.page.getByText(/incorrect/i);
-    await expect(errorMessage).toBeVisible();
+    await this.loginPagePractise.verifyErrorMessage();
 });
