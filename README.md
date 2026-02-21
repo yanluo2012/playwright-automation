@@ -82,7 +82,7 @@ npx cucumber-js features/ErrorValidations.feature --exit
 npx cucumber-js --tags "@Regression" --exit
 
 # By default, npx cucumber-js runs nothing in parallel 
-# --parallel N spawns N worker processes and distributes scenarios (from all over the featue files) across them.  Therefore, feature files may run in parallel via scenario distrubution.
+# --parallel N spawns N worker processes and distributes scenarios across them.  Therefore, feature files may run in parallel via scenario distrubution.
 npx cucumber-js --parallel 2 --exit
 ```
 ## ⚙️ Configuration
