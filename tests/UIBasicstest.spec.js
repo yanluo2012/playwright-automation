@@ -86,7 +86,7 @@ test('Child Window Handling', async ({ browser }) => {
     console.log("new username is ", newUsername);
 })
 
-test.only('First Playwright test', async ({ browser }) => {
+test('First Playwright test', async ({ browser }) => {
     const context = await browser.newContext(); // create a new browser context (like incognito mode)
     const page = await context.newPage(); // create a new page in the context
     await page.goto('https://google.com/'); // navigate to the URL

@@ -56,6 +56,12 @@ npx playwright test tests/ClientAppPO.spec.js --config playwright.config1.js
 
 # Run with specific project
 npx playwright test tests/ClientAppPO.spec.js --config playwright.config1.js --project=firefox
+
+# Run tests in debug mode
+npx playwright test tests/AngularPractice.spec.js --debug
+
+#
+npx playwright codegen {url}
 ```
 ### Tag-Based Execution/Skipping Tests
 ```bash
@@ -186,6 +192,17 @@ Before({ tags: "@foo" }, async function () {
 });
 ```
 ## 📊 Reporting
+### Playwright reports
+```javascript
+# In playwright.config.js, this setting generates the index.html report in the playwright-report folder.
+# Run npx playwright show-report to display the same report.
+reporter: 'html',
+# In playwright.config.js, this setting generates trace.zip when the test fails. Download it from the Trace section in the HTML report (index.html), then open it in trace.playwright.dev to visualize the trace and debug a test run step by step.
+# You can also find trace.zip in the test-results folder.
+use: {
+    trace: 'retain-on-failure', // off, on
+},
+```
 ### Allure Reports
 ```bash
 # Run tests with Allure reporter
