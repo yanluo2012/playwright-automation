@@ -21,9 +21,11 @@
     "@types/node": "^25.0.10",
     "allure-commandline": "^2.36.0",
     "allure-playwright": "^3.4.5",
+    "cheerio": "^1.2.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "exceljs": "^4.4.0"
+    "exceljs": "^4.4.0",
+    "playwright": "1.58.1"
   }
 }
