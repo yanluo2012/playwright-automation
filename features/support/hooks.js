@@ -4,9 +4,9 @@ const { Before, AfterStep, Status } = require('@cucumber/cucumber');
 
 Before(async function () {
     const browser = await chromium.launch({ headless: false });
-    const context = await browser.newContext();
-    this.page = await context.newPage();
-    this.poManager = new POManager(this.page);
+    this.context = await browser.newContext();
+    this.page = await this.context.newPage();
+    this.poManager = new POManager(this.page, this.context);
 });
 
 AfterStep(async function ({ pickle, result }) {

@@ -2,16 +2,17 @@ const { expect } = require('@playwright/test')
 
 class LoginPagePractise {
 
-    constructor(page) {
+    constructor(page, context) {
+        this.context = context;
         this.page = page;
-        this.userName = page.getByLabel('Username');
-        this.password = page.getByLabel('Password');
-        this.termsCheckbox = page.getByRole('checkbox', { name: /I Agree to the terms and conditions/i });
-        this.signInButton = page.getByRole('button', { name: 'Sign In' });
-        this.errorMessage = page.getByText(/incorrect/i);
-        this.dropdown = page.getByRole('combobox');
-        this.okUserRoleWarning = page.getByRole('button', { name: 'Okay' });
-        this.blinkingText = page.getByText("Free Access to");
+        this.userName = this.page.getByLabel('Username');
+        this.password = this.page.getByLabel('Password');
+        this.termsCheckbox = this.page.getByRole('checkbox', { name: /I Agree to the terms and conditions/i });
+        this.signInButton = this.page.getByRole('button', { name: 'Sign In' });
+        this.errorMessage = this.page.getByText(/incorrect/i);
+        this.dropdown = this.page.getByRole('combobox');
+        this.okUserRoleWarning = this.page.getByRole('button', { name: 'Okay' });
+        this.blinkingText = this.page.getByText("Free Access to");
     }
 
     async goTo() {
@@ -61,9 +62,22 @@ class LoginPagePractise {
     async clickBlinkingText() {
         await this.blinkingText.click();
         const [newPage] = await Promise.all([
-            context.waitForEvent('page'), // listen for new opened tab
+            this.context.waitForEvent('page'), // listen for new opened tab
             this.blinkingText.click() // action that opens the tab
         ]);
+        this.newPage = newPage;
+    }
+
+    async verifyMentorName(mentorName) {
+        const redText = this.newPage.locator("p.im-para.red")
+        const contact = await redText.textContent();
+        console.log(contact);
+
+        const arrayText = contact.split('@');
+        const domain = arrayText[1].split(' ')[0];
+
+        console.log(domain);
+        expect(domain).toBe(mentorName);
     }
 
 }

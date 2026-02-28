@@ -11,7 +11,7 @@ Feature: Login Page Practice validation
       | yanluo2012@gmail.com | wrongpwd  |
       | hello@123.com        | wrongpwd2 |
 
-  @working
+  @dropdown
   Scenario: Validation of product visibility after successful login
     Given a login to loginpagePractise Ecommerce applicataion with "rahulshettyacademy" and "Learning@830$3mK2"
     When choose "User" role
@@ -21,3 +21,9 @@ Feature: Login Page Practice validation
     Then Verify blinking text is displayed
     When click on Sign In button
     Then Verify "iphone X" is displayed in Shop Page
+
+    @childwindow
+    Scenario: Validation of mentor name in new tab
+    Given a login to loginpagePractise Ecommerce applicataion with "rahulshettyacademy" and "Learning@830$3mK2"
+    When I click on blinking text
+    Then Verify mentor name is "rahulshettyacademy.com"

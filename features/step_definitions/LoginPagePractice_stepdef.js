@@ -33,7 +33,7 @@ Given('select {string} from dropdown', async function (option) {
     await this.loginPagePractise.selectOption(option);
 });
 
-Given('accept terms and conditions', async function () {
+Given('accept terms and conditions', { timeout: 100 * 1000 }, async function () {
     await this.loginPagePractise.acceptTerms();
 });
 
@@ -44,4 +44,12 @@ Given('click on Sign In button', async function () {
 
 Then('Verify blinking text is displayed', async function () {
     await this.loginPagePractise.verifyBlinkingText();
+})
+
+When('I click on blinking text', async function () {
+    await this.loginPagePractise.clickBlinkingText();
+})
+
+Then('Verify mentor name is {string}', async function (mentorName) {
+    await this.loginPagePractise.verifyMentorName(mentorName);
 })

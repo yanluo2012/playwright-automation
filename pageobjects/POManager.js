@@ -7,10 +7,11 @@ const { LoginPagePractise } = require('./LoginPagePractise');
 const { ShopPagePractise } = require('./ShopPagePractise');
 
 class POManager {
-    constructor(page) {
+    constructor(page, context) {
+        this.context = context;
         this.page = page;
         this.loginPage = new LoginPage(this.page);
-        this.loginPagePractise = new LoginPagePractise(this.page);
+        this.loginPagePractise = new LoginPagePractise(this.page, this.context);
         this.shopPagePractise = new ShopPagePractise(this.page);
         this.dashboardPage = new DashboardPage(this.page);
         this.ordersHistoryPage = new OrdersHistoryPage(this.page);
