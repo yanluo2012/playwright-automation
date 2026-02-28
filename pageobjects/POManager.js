@@ -5,6 +5,8 @@ const { OrdersReviewPage } = require('./OrdersReviewPage');
 const { CartPage } = require('./CartPage');
 const { LoginPagePractise } = require('./LoginPagePractise');
 const { ShopPagePractise } = require('./ShopPagePractise');
+const { AngularPracticePage } = require('./AngularPracticePage');
+const { SeleniumPractisePage } = require('./SeleniumPractisePage');
 
 class POManager {
     constructor(page, context) {
@@ -13,6 +15,8 @@ class POManager {
         this.loginPage = new LoginPage(this.page);
         this.loginPagePractise = new LoginPagePractise(this.page, this.context);
         this.shopPagePractise = new ShopPagePractise(this.page);
+        this.angularPracticePage = new AngularPracticePage(this.page);
+        this.seleniumPractisePage = new SeleniumPractisePage(this.page);
         this.dashboardPage = new DashboardPage(this.page);
         this.ordersHistoryPage = new OrdersHistoryPage(this.page);
         this.ordersReviewPage = new OrdersReviewPage(this.page);
@@ -45,6 +49,14 @@ class POManager {
 
     getShopPagePractise() {
         return this.shopPagePractise;
+    }
+
+    getAngularPracticePage() {
+        return this.angularPracticePage;   
+    }
+
+    getSeleniumPractisePage() {
+        return this.seleniumPractisePage;
     }
 }
 
