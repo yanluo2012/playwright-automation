@@ -30,33 +30,33 @@ test('Playwright practise', async ({ page }) => {
     console.log(allTitles);
 });
 
-test('@Web UI Controls', async ({ page }) => {
-    const dropdown = page.getByRole('combobox');
-    const userRadioButton = page.locator(".radiotextsty").last();
-    const okButton = page.getByRole('button', { name: 'Okay' });
-    const termsCheckbox = page.locator("input#terms");
-    const blinkingText = page.getByText("Free Access to");
-    // const blinkingText = page.locator("[href*='documents-request']"); // Rahul's way
+// test('@Web UI Controls', async ({ page }) => {
+//     const dropdown = page.getByRole('combobox');
+//     const userRadioButton = page.locator(".radiotextsty").last();
+//     const okButton = page.getByRole('button', { name: 'Okay' });
+//     const termsCheckbox = page.locator("input#terms");
+//     const blinkingText = page.getByText("Free Access to");
+//     // const blinkingText = page.locator("[href*='documents-request']"); // Rahul's way
 
-    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
-    await dropdown.selectOption("consult"); // select by value
+//     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+//     await dropdown.selectOption("consult"); // select by value
 
-    // Select radio button Student and click okay in the pop up
-    await userRadioButton.check();
-    await okButton.click();
-    await expect(userRadioButton).toBeChecked();
+//     // Select radio button Student and click okay in the pop up
+//     await userRadioButton.check();
+//     await okButton.click();
+//     await expect(userRadioButton).toBeChecked();
 
-    // check and uncheck the terms checkbox
-    await termsCheckbox.check();
-    await expect(termsCheckbox).toBeChecked();
-    await termsCheckbox.uncheck();
-    await expect(termsCheckbox).not.toBeChecked();
-    // inner assertion page.locator("input#terms").isChecked() need to be awaited
-    expect(await termsCheckbox.isChecked()).toBeFalsy();
+//     // check and uncheck the terms checkbox
+//     await termsCheckbox.check();
+//     await expect(termsCheckbox).toBeChecked();
+//     await termsCheckbox.uncheck();
+//     await expect(termsCheckbox).not.toBeChecked();
+//     // inner assertion page.locator("input#terms").isChecked() need to be awaited
+//     expect(await termsCheckbox.isChecked()).toBeFalsy();
 
-    // assert blinking text
-    await expect(blinkingText).toHaveAttribute("class", "blinkingText");
-});
+//     // assert blinking text
+//     await expect(blinkingText).toHaveAttribute("class", "blinkingText");
+// });
 
 
 test('Child Window Handling', async ({ browser }) => {

@@ -4,12 +4,14 @@ const { OrdersHistoryPage } = require('./OrdersHistoryPage');
 const { OrdersReviewPage } = require('./OrdersReviewPage');
 const { CartPage } = require('./CartPage');
 const { LoginPagePractise } = require('./LoginPagePractise');
+const { ShopPagePractise } = require('./ShopPagePractise');
 
 class POManager {
     constructor(page) {
         this.page = page;
         this.loginPage = new LoginPage(this.page);
         this.loginPagePractise = new LoginPagePractise(this.page);
+        this.shopPagePractise = new ShopPagePractise(this.page);
         this.dashboardPage = new DashboardPage(this.page);
         this.ordersHistoryPage = new OrdersHistoryPage(this.page);
         this.ordersReviewPage = new OrdersReviewPage(this.page);
@@ -38,6 +40,10 @@ class POManager {
 
     getOrdersReviewPage() {
         return this.ordersReviewPage;
+    }
+
+    getShopPagePractise() {
+        return this.shopPagePractise;
     }
 }
 

@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber')
 const { expect } = require('@playwright/test')
 
 // by default, cucumber has a timeout of 5s for each step, here we are overriding it to 10 seconds for the login step, as sometimes it may take more time to load the page and perform login action
-Given('a login to Ecommerce applicataion with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
+Given('a login to client Ecommerce applicataion with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
     const loginPage = this.poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(username, password);
@@ -39,14 +39,3 @@ Then('Verify order in present in the OrderHistory', async function () {
     expect(this.orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy();
 });
 
-// by default, cucumber has a timeout of 5s for each step, here we are overriding it to 100 seconds for the login step, as sometimes it may take more time to load the page and perform login action
-Given('a login to Ecommerce2 applicataion with {string} and {string}',  { timeout: 100 * 1000 }, async function (username, password) {
-    this.loginPagePractise = this.poManager.getLoginPagePractise();
-    await this.loginPagePractise.goTo();
-    await this.loginPagePractise.login(username, password);
-    await this.loginPagePractise.clickSignIn();
-});
-
-Then('Verify Error message is displayed', async function () {
-    await this.loginPagePractise.verifyErrorMessage();
-});
