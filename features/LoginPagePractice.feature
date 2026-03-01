@@ -25,5 +25,6 @@ Feature: Login Page Practice validation
     @childwindow
     Scenario: Validation of mentor name in new tab
     Given a login to loginpagePractise Ecommerce applicataion with "rahulshettyacademy" and "Learning@830$3mK2"
+    ## open child window to show mentor name
     When I click on blinking text
     Then Verify mentor name is "rahulshettyacademy.com"

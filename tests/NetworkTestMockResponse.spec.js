@@ -1,14 +1,7 @@
 const { test, expect, request } = require('@playwright/test');
 const { APIUtils } = require('../utils/ApiUtils');
 const loginPayload = { userEmail: "yanluo2012@gmail.com", userPassword: ".5x.xGRyB8h6RR#" };
-const orderPayload = {
-    orders: [
-        {
-            country: "Cuba",
-            productOrderedId: "6964af52c941646b7a919472"
-        }
-    ]
-};
+const productName = "ZARA COAT 3";
 const fakePayloadOrders = { data: [], message: "No Orders" };
 
 let createOrderResponse;
@@ -16,6 +9,16 @@ let createOrderResponse;
 test.beforeAll(async () => {
     const apiContext = await request.newContext();
     const apiUtils = new APIUtils(apiContext, loginPayload);
+    const token = await apiUtils.getToken();
+    const productOrderedId = await apiUtils.getProductIdByName(productName, token);
+    const orderPayload = {
+        orders: [
+            {
+                country: "Cuba",
+                productOrderedId
+            }
+        ]
+    };
 
     // Create order
     createOrderResponse = await apiUtils.createOrder(orderPayload);

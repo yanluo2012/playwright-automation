@@ -1,6 +1,6 @@
 Feature: Client Dashboard validation
 
-  @Regression
+  @endtoend
   Scenario: Placing the Order
     Given a login to client Ecommerce applicataion with "yanluo2012@gmail.com" and ".5x.xGRyB8h6RR#"
     When Add "ZARA COAT 3" to Cart
