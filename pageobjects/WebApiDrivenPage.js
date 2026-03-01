@@ -1,4 +1,4 @@
-class WebAPIOrdersPage {
+class WebAPIDrivenPage {
     constructor(page) {
         this.page = page;
         this.ordersRows = page.locator("tbody tr");
@@ -40,4 +40,4 @@ class WebAPIOrdersPage {
     }
 }
 
-module.exports = { WebAPIOrdersPage };
+module.exports = { WebAPIDrivenPage };

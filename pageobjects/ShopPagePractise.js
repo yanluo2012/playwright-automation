@@ -10,8 +10,7 @@ async waitForProducts() {
 }
 
 getProductCardByName(productName) {
-    // return this.productCards.filter({ hasText: productName }).first();
-    return this.page.getByRole('link', { name: productName });
+    return this.productCards.filter({ hasText: productName }).first();
 }
 
 }

@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect, request } = require('@playwright/test');
-const { WebAPIOrdersPage } = require('../../pageobjects/WebApiDrivenPage');
+const { WebAPIDrivenPage } = require('../../pageobjects/WebApiDrivenPage');
 
 Given('an API created order for {string} with {string} and {string}', async function (productName, userEmail, userPassword) {
     const apiContext = await request.newContext();
@@ -65,17 +65,17 @@ Given('an API created order for {string} with {string} and {string}', async func
 });
 
 When('I open the client app with the API token', async function () {
-    this.webAPIOrdersPage = new WebAPIOrdersPage(this.page);
-    await this.webAPIOrdersPage.bootstrapSessionWithToken(this.apiToken);
-    await this.webAPIOrdersPage.goToClientApp();
+    this.webApiDrivenPage = new WebAPIDrivenPage(this.page);
+    await this.webApiDrivenPage.bootstrapSessionWithToken(this.apiToken);
+    await this.webApiDrivenPage.goToClientApp();
 });
 
 When('I open My Orders and view the API created order', async function () {
-    await this.webAPIOrdersPage.openMyOrders();
-    await this.webAPIOrdersPage.openOrderById(this.createdOrderId);
+    await this.webApiDrivenPage.openMyOrders();
+    await this.webApiDrivenPage.openOrderById(this.createdOrderId);
 });
 
 Then('the order details should match the API created order id', async function () {
-    const displayedOrderId = await this.webAPIOrdersPage.getDisplayedOrderId();
+    const displayedOrderId = await this.webApiDrivenPage.getDisplayedOrderId();
     expect(displayedOrderId).toBe(this.createdOrderId);
 });

@@ -3,6 +3,7 @@ const { expect } = require('@playwright/test')
 
 // by default, cucumber has a timeout of 5s for each step, here we are overriding it to 10 seconds for the login step, as sometimes it may take more time to load the page and perform login action
 Given('a login to client Ecommerce applicataion with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
+    this.username = username;
     const loginPage = this.poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(username, password);
@@ -21,6 +22,11 @@ Then('Verify {string} is displayed in Cart', async function (productName) {
     const cartPage = this.poManager.getCartPage();
     await cartPage.VerifyProductIsDisplayed(productName);
     await cartPage.Checkout();
+});
+
+Then('Verify logged in email is displayed on checkout page', async function () {
+    const ordersReviewPage = this.poManager.getOrdersReviewPage();
+    await ordersReviewPage.VerifyEmailId(this.username);
 });
 
 
