@@ -7,6 +7,7 @@ const { LoginPagePractise } = require('./LoginPagePractise');
 const { ShopPagePractise } = require('./ShopPagePractise');
 const { AngularPracticePage } = require('./AngularPracticePage');
 const { SeleniumPractisePage } = require('./SeleniumPractisePage');
+const { AutomationPracticePage } = require('./AutomationPracticePage');
 
 class POManager {
     constructor(page, context) {
@@ -17,6 +18,7 @@ class POManager {
         this.shopPagePractise = new ShopPagePractise(this.page);
         this.angularPracticePage = new AngularPracticePage(this.page);
         this.seleniumPractisePage = new SeleniumPractisePage(this.page);
+        this.automationPracticePage = new AutomationPracticePage(this.page);
         this.dashboardPage = new DashboardPage(this.page);
         this.ordersHistoryPage = new OrdersHistoryPage(this.page);
         this.ordersReviewPage = new OrdersReviewPage(this.page);
@@ -57,6 +59,10 @@ class POManager {
 
     getSeleniumPractisePage() {
         return this.seleniumPractisePage;
+    }
+
+    getAutomationPracticePage() {
+        return this.automationPracticePage;
     }
 }
 
