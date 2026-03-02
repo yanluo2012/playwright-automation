@@ -9,19 +9,8 @@ let createOrderResponse;
 test.beforeAll(async () => {
     const apiContext = await request.newContext();
     const apiUtils = new APIUtils(apiContext, loginPayload);
-    const token = await apiUtils.getToken();
-    const productOrderedId = await apiUtils.getProductIdByName(productName, token);
-    const orderPayload = {
-        orders: [
-            {
-                country: "Cuba",
-                productOrderedId
-            }
-        ]
-    };
 
-    // Create order
-    createOrderResponse = await apiUtils.createOrder(orderPayload);
+    createOrderResponse = await apiUtils.createOrderByProductName(productName, "Cuba");
     console.log("orderId: ", createOrderResponse.orderId);
 });
 

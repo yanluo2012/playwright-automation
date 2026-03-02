@@ -1,34 +1,10 @@
-import type { APIRequestContext } from "@playwright/test";
-
-type LoginPayload = {
-    userEmail: string;
-    userPassword: string;
-};
-
-type CreateOrderResponse = {
-    token: string;
-    orderId: string;
-};
-
-type Product = {
-    _id: string;
-    productName: string;
-};
-
-type ProductsResponse = {
-    data?: Product[];
-};
-
-export class APIUtils {
-    apiContext: APIRequestContext;
-    loginPayload: LoginPayload;
-
-    constructor(apiContext: APIRequestContext, loginPayload: LoginPayload) {
+class APIUtils {
+    constructor(apiContext, loginPayload) {
         this.apiContext = apiContext;
         this.loginPayload = loginPayload;
     }
 
-    async getToken(): Promise<string> {
+    async getToken() {
         const loginResponse = await this.apiContext.post(
             "https://rahulshettyacademy.com/api/ecom/auth/login",
             { data: this.loginPayload }
@@ -38,7 +14,7 @@ export class APIUtils {
         return loginResponseBody.token;
     }
 
-    async getProductIdByName(productName: string, token: string): Promise<string> {
+    async getProductIdByName(productName, token) {
         const productsResponse = await this.apiContext.post(
             "https://rahulshettyacademy.com/api/ecom/product/get-all-products",
             {
@@ -46,7 +22,7 @@ export class APIUtils {
             }
         );
 
-        const productsJson = (await productsResponse.json()) as ProductsResponse;
+        const productsJson = await productsResponse.json();
         const products = productsJson.data ?? [];
         const product = products.find((item) => item.productName === productName);
 
@@ -57,15 +33,10 @@ export class APIUtils {
         return product._id;
     }
 
-    async createOrder(orderPayload: Record<string, unknown>): Promise<CreateOrderResponse> {
-        const response = {
-            token: await this.getToken(),
-            orderId: "",
-        };
-
+    async createOrderWithToken(orderPayload, token) {
         const orderResponse = await this.apiContext.post("https://rahulshettyacademy.com/api/ecom/order/create-order", {
             data: orderPayload,
-            headers: { 'Authorization': response.token, 'Content-Type': "application/json" }
+            headers: { Authorization: token, "Content-Type": "application/json" },
         });
         const orderResponseJson = await orderResponse.json();
 
@@ -78,8 +49,25 @@ export class APIUtils {
             throw new Error(`Create order response missing order id: ${JSON.stringify(orderResponseJson)}`);
         }
 
-        response.orderId = orderId;
+        return orderId;
+    }
 
-        return response;
+    async createOrderByProductName(productName, country = "Cuba") {
+        const token = await this.getToken();
+        const productOrderedId = await this.getProductIdByName(productName, token);
+        const orderPayload = {
+            orders: [{ country, productOrderedId }],
+        };
+
+        const orderId = await this.createOrderWithToken(orderPayload, token);
+        return { token, orderId };
+    }
+
+    async createOrder(orderPayload) {
+        const token = await this.getToken();
+        const orderId = await this.createOrderWithToken(orderPayload, token);
+        return { token, orderId };
     }
 }
+
+module.exports = { APIUtils };
